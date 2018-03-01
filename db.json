@@ -1,0 +1,30 @@
+{
+  "scores": [
+
+    {
+      "user_name": "third",
+      "seconds": "47",
+      "id": 5
+    },
+    {
+      "user_name": "first",
+      "seconds": "38",
+      "id": 6
+    },
+    {
+      "user_name": "hhh",
+      "seconds": "886",
+      "id": 7
+    },
+    {
+      "user_name": "second",
+      "seconds": "40",
+      "id": 8
+    },
+    {
+      "user_name": "number 1",
+      "seconds": "731",
+      "id": 9
+    }
+  ]
+}

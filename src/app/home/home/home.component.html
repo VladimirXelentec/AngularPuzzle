@@ -1,0 +1,85 @@
+<div class="game_container" >
+  <div *ngIf="status === 1" class="greyzone"  [ngStyle]="{ 'height.px': this.settings.height , 'width.px': this.settings.width}">
+
+    <puzzle-element  draggable *ngFor="let element of puzzles"  [dragData]="element"  image_url="{{puzzle_picture}}" [element]="element" 
+    [ngStyle]="{ 'height.px': puzzle_height, 'width.px': puzzle_width ,'transform' : 'translate(' + element.position.left+'px, '+ element.position.top+'px)'}" ></puzzle-element>
+
+  </div>
+
+  <div class = "puzzle" #puzzle [ngStyle]="{ 'height.px': this.settings.height , 'width.px': this.settings.width, 'background-image': 'url(' + puzzle_picture + ')' }">
+     <ng-container *ngIf="status ===1">
+      <div *ngFor="let row_i of game_zone" [ngStyle]="{'height.px': puzzle_height}">
+
+        <div droppable *ngFor="let place of row_i.places" [ngStyle]="{ 'height.px': puzzle_height, 'width.px': puzzle_width }" (onDrop)="onPuzzleDrop($event, place)">
+          <puzzle-element  *ngIf="place.element"  image_url="{{puzzle_picture}}"  [element]="place.element" ></puzzle-element>
+        </div>
+      </div>
+     </ng-container>
+  </div>
+  <br>
+  <button *ngIf="!status" class="btn btn-success"  (click)="startGame()" >Start game</button>
+  <ng-container *ngIf="status === 1">
+     <h3  class="congr"> You score is <b> {{seconds}} </b> seconds</h3>
+  </ng-container>
+ <ng-container *ngIf="status >1">
+ <h1 class="congr">You won!</h1>
+ <h3  class="congr"> You score is <b> {{seconds}} </b> seconds</h3>
+
+You can 
+<br>
+<button *ngIf="status >= 2" class="btn btn-success"  (click)="setDefault()" >Try Again</button>
+<br>
+
+<form *ngIf="status === 2"  #form="ngForm" >
+or 
+<br>
+  <div class="form-group">
+      <div class="row">
+        <div class="col-md-12">
+         <input type="text" name="user_name" required class="form-control" [(ngModel)]="user_name" placeholder="Enter Your Name">
+        </div>
+      </div>
+  </div>
+ 
+   <button class="btn btn-success" (click)="save(form)" [disabled]="form.invalid" >Save your result</button>
+</form>
+ </ng-container>
+</div>
+
+
+<ng-template #endGame>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Statistics</h4>
+ <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+ <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>User</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let winner of winners; let i = index " >
+      <td scope="row">
+        {{i+1}}
+      </td>
+      <td>
+        {{winner.user_name}}
+      </td>
+      <td>
+       {{winner.seconds}} 
+        </td>
+    </tr>
+  </tbody>
+</table>
+
+ 
+  </div>
+</ng-template>

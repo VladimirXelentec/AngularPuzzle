@@ -1,0 +1,38 @@
+
+.game_container {
+	text-align: center;
+    .greyzone{
+    	background-color: #e6e6e6;
+      	margin: auto;
+      	display: inline-block;
+     	puzzle-element {
+
+     		display:flex;
+     		position: absolute;
+     	}
+    }
+    .puzzle {
+    	background-color: #e6e6e6;
+      	margin: auto;
+      	display: inline-block;
+    	div{
+    		div{
+    			border: 1px dotted; 
+    			box-sizing: border-box;
+    			background-color: #e6e6e6;
+    			display: inline-block; 
+    			puzzle-element:{
+    				height: 100%;
+    				width: 100%;
+    			}
+    		}
+    	}
+    }
+}
+
+form {
+	padding: 10px;
+	width: 50%;
+	margin: auto;
+}
+
